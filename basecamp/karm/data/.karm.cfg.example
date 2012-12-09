@@ -1,0 +1,5 @@
+[global]
+url = http://example.updatelog.com
+user = example
+password = examplepassword
+storage = /path/to/karm/storage/file/karm.ics
