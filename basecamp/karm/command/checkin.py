@@ -78,7 +78,7 @@ class CheckIn(Command):
         # now let's go through the collected data
         # and decide what to do with each entry
         for project_id, project in karm.todos.items():
-            if project.x_kde_ktimetracker_bctype != 'project':
+            if project.x_basecamp_type != 'project':
                 continue
             
             if self.cmdutil.debug:
@@ -102,17 +102,17 @@ class CheckIn(Command):
                     print "    Add time to project: (%s)" % \
                         bcTime(pSessionTime)
                 # update karm file
-                project.x_kde_ktimetracker_totalsessiontime = '0'
+                project.x_kde_karm_totalsessiontime = '0'
                 updated = True
                 if self.cmdutil.debug:
                     print "    Reset project's session time to 0"
                     
             # now loop through the project's todo lists
             for list_id, todolist in project.todos.items():
-                if todolist.x_kde_ktimetracker_bctype == 'todolist':
+                if todolist.x_basecamp_type == 'todolist':
                     # go deeper to find todos
                     for todo_id, todo in todolist.todos.items():
-                        if todo.x_kde_ktimetracker_bctype != 'todoitem':
+                        if todo.x_basecamp_type != 'todoitem':
                             # create todo in basecamp
                             todo_id = str(bc.createTodoItem(
                                 int(list_id),
@@ -122,7 +122,7 @@ class CheckIn(Command):
                             todolist.delete(todo.uid)
                             todo.uid = todo_id
                             todolist.add(todo)
-                            todo.x_kde_ktimetracker_bctype = 'todoitem'
+                            todo.x_basecamp_type = 'todoitem'
                             updated = True
                         
                         # check for todos time entry
@@ -147,7 +147,7 @@ class CheckIn(Command):
                                       "(%s)" % (bcTime(pSessionTime),
                                                 todo.summary)
                             # update karm file
-                            todo.x_kde_ktimetracker_totalsessiontime = '0'
+                            todo.x_kde_karm_totalsessiontime = '0'
                             updated = True
                             if self.cmdutil.debug:
                                 print "    Reset todo's session time to 0"
@@ -173,7 +173,7 @@ class CheckIn(Command):
                                         todo.summary
                                     )
                                 # update karm file
-                                entry.x_kde_ktimetracker_totalsessiontime = '0'
+                                entry.x_kde_karm_totalsessiontime = '0'
                                 updated = True
                                 
                             # delete time entry if it is checked
@@ -211,7 +211,7 @@ class CheckIn(Command):
                             print "    Added time for project: (%s)" % \
                                 bcTime(pSessionTime)
                         # update karm file
-                        todolist.x_kde_ktimetracker_totalsessiontime = '0'
+                        todolist.x_kde_karm_totalsessiontime = '0'
                         updated = True
 
                 # after logging time delete such kind of todo

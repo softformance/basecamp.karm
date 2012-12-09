@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""KTime command line utility
+"""KArm command line utility
 
 Depends on cmdhelper package.
 Loads karm.commands entry points to retrieve available commmands.

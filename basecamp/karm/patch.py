@@ -5,8 +5,8 @@ content lines. These lines should start with 'X-' string.
 
 KArm uses this extending possibility extensively for it's time logging.
 E. g.:
-  X-KDE-ktimetracker-totalSessionTime:0^M
-  X-KDE-ktimetracker-totalTaskTime:0^M
+  X-KDE-karm-totalSessionTime:0^M
+  X-KDE-karm-totalTaskTime:0^M
 
 As you see, here we have property names with lower cased letters.
 But by using vobject python library it's impossible to serialize
@@ -22,7 +22,7 @@ import cStringIO
 import codecs
 
 import vobject.base
-from vobject.base import ContentLine, Component, foldOneLine, dquoteEscape
+from vobject.base import ContentLine, Component, foldOneLine
 
 def karm_defaultSerialize(obj, buf, lineLength):
     """Encode and fold obj and its children, write to buf or return a string."""
@@ -55,7 +55,7 @@ def karm_defaultSerialize(obj, buf, lineLength):
         s.write(obj.name)
         ####################################################################
         for key, paramvals in obj.params.iteritems():
-            s.write(';' + key + '=' + ','.join(dquoteEscape(p) for p in paramvals))
+            s.write(';' + key + '=' + ','.join(quoteEscape(p) for p in paramvals))
         s.write(':' + obj.value)
         if obj.behavior and not startedEncoded: obj.behavior.decode(obj)
         foldOneLine(outbuf, s.getvalue(), lineLength)

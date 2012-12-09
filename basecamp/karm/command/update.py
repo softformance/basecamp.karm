@@ -67,7 +67,7 @@ class Update(Command):
                 karm.add(Todo(
                     str(project.id),
                     project.name,
-                    x_kde_ktimetracker_bctype='project'
+                    x_basecamp_type='project'
                 ))
                 updated = True
                 if self.cmdutil.debug:
@@ -90,7 +90,7 @@ class Update(Command):
                     str(todolist.id),
                     todolist.name,
                     related_to=project_id,
-                    x_kde_ktimetracker_bctype='todolist'
+                    x_basecamp_type='todolist'
                 ))
                 updated = True
                 if self.cmdutil.debug:
@@ -122,7 +122,7 @@ class Update(Command):
                         str(todo.id),
                         todo.content,
                         related_to=task.uid,
-                        x_kde_ktimetracker_bctype='todoitem'
+                        x_basecamp_type='todoitem'
                     ))
                     updated = True
                     if self.cmdutil.debug:
@@ -153,12 +153,12 @@ class Update(Command):
 
                 # update todo item's time
                 if self.update_time:
-                    if subtask.x_kde_ktimetracker_totalsessiontime is None:
-                        subtask.x_kde_ktimetracker_totalsessiontime = '0'
-                    if subtask.x_kde_ktimetracker_totaltasktime is None:
-                        subtask.x_kde_ktimetracker_totaltasktime = '0'
-                    sessionMinutes = int(subtask.x_kde_ktimetracker_totalsessiontime)
-                    totalMinutes = int(subtask.x_kde_ktimetracker_totaltasktime)
+                    if subtask.x_kde_karm_totalsessiontime is None:
+                        subtask.x_kde_karm_totalsessiontime = '0'
+                    if subtask.x_kde_karm_totaltasktime is None:
+                        subtask.x_kde_karm_totaltasktime = '0'
+                    sessionMinutes = int(subtask.x_kde_karm_totalsessiontime)
+                    totalMinutes = int(subtask.x_kde_karm_totaltasktime)
                     
                     # fetch total todo item's time from basecamp
                     hours = 0.0
@@ -166,7 +166,7 @@ class Update(Command):
                         hours += float(time_entry.hours)
                         
                     if int(hours * 60.0) != totalMinutes - sessionMinutes:
-                        subtask.x_kde_ktimetracker_totaltasktime = str(
+                        subtask.x_kde_karm_totaltasktime = str(
                             sessionMinutes + int(hours * 60.0)
                         )
                         updated = True

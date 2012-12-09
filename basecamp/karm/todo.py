@@ -1,15 +1,15 @@
 #!/data/work/pythons/python-2.4.5/bin/python
 
-"""KTime Todo class
+"""KArm Todo class
 
-The main data atom in KTime.
+The main data atom in KArm.
 
 Todo schema:
 
     DTSTAMP:20081206T203902Z
-    X-KDE-ktimetracker-bctype:todoitem
-    X-KDE-ktimetracker-totalSessionTime:0
-    X-KDE-ktimetracker-totalTaskTime:0
+    X-BASECAMP-type:todoitem
+    X-KDE-karm-totalSessionTime:0
+    X-KDE-karm-totalTaskTime:0
     CREATED:20081127T210402Z
     UID:6494365
     LAST-MODIFIED:20081206T203902Z
@@ -36,9 +36,9 @@ class Todo(object):
         related_to - parent task uid or None in case it's root task
         completed - date and time when task was completed
         percent_complete - how many percents of the task is completed
-        x_kde_ktimetracker_totalsessiontime - KTime session time of the task
-        x_kde_ktimetracker_totaltasktime - KTime time of the task
-        x_kde_ktimetracker-bctype - type of task as it's represented in basecamp
+        x_kde_karm_totalsessiontime - KArm session time of the task
+        x_kde_karm_totaltasktime - KArm time of the task
+        x_basecamp_type - type of task as it's represented in basecamp
                               (project, todolist, todoitem or None)
         
         todos - contained todos
@@ -47,8 +47,8 @@ class Todo(object):
     
     def __init__(self, uid, summary, dtstamp=None, created=None,
                  last_modified=None, related_to=None, completed=None,
-                 percent_complete=None, x_kde_ktimetracker_totalsessiontime=None,
-                 x_kde_ktimetracker_totaltasktime=None, x_kde_ktimetracker_bctype=None):
+                 percent_complete=None, x_kde_karm_totalsessiontime=None,
+                 x_kde_karm_totaltasktime=None, x_basecamp_type=None):
         self.uid = uid
         self.summary = unescape(summary)
         self.dtstamp = dtstamp
@@ -57,9 +57,9 @@ class Todo(object):
         self.related_to = related_to
         self.completed = completed
         self.percent_complete = percent_complete
-        self.x_kde_ktimetracker_totalsessiontime = x_kde_ktimetracker_totalsessiontime
-        self.x_kde_ktimetracker_totaltasktime = x_kde_ktimetracker_totaltasktime
-        self.x_kde_ktimetracker_bctype = x_kde_ktimetracker_bctype
+        self.x_kde_karm_totalsessiontime = x_kde_karm_totalsessiontime
+        self.x_kde_karm_totaltasktime = x_kde_karm_totaltasktime
+        self.x_basecamp_type = x_basecamp_type
 
         self.todos = {}
     

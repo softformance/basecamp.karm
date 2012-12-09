@@ -28,7 +28,7 @@ def bcTime(time):
     return '%.2f' % round(time / 60.0, 2)
 
 def getSessionTime(todo):
-    sessionTime = todo.x_kde_ktimetracker_totalsessiontime
+    sessionTime = todo.x_kde_karm_totalsessiontime
     if sessionTime is not None:
         sessionTime = int(sessionTime)
         if sessionTime > 0:

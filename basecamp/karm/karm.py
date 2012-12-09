@@ -1,3 +1,5 @@
+#!/data/work/pythons/python-2.4.5/bin/python
+
 """KArm class
 
 KArm wrapper to make it easier work with karm data (*.ics) file.
@@ -88,12 +90,12 @@ class KArm(object):
             todo.completed = component.contents['completed'][0].value
         if component.contents.get('percent-complete', None) is not None:
             todo.percent_complete = component.contents['percent-complete'][0].value
-        if component.contents.get('x-kde-ktimetracker-totalsessiontime', None) is not None:
-            todo.x_kde_ktimetracker_totalsessiontime = component.contents['x-kde-ktimetracker-totalsessiontime'][0].value
-        if component.contents.get('x-kde-ktimetracker-totaltasktime', None) is not None:
-            todo.x_kde_ktimetracker_totaltasktime = component.contents['x-kde-ktimetracker-totaltasktime'][0].value
-        if component.contents.get('x-kde-ktimetracker-bctype', None) is not None:
-            todo.x_kde_ktimetracker_bctype = component.contents['x-kde-ktimetracker-bctype'][0].value
+        if component.contents.get('x-kde-karm-totalsessiontime', None) is not None:
+            todo.x_kde_karm_totalsessiontime = component.contents['x-kde-karm-totalsessiontime'][0].value
+        if component.contents.get('x-kde-karm-totaltasktime', None) is not None:
+            todo.x_kde_karm_totaltasktime = component.contents['x-kde-karm-totaltasktime'][0].value
+        if component.contents.get('x-basecamp-type', None) is not None:
+            todo.x_basecamp_type = component.contents['x-basecamp-type'][0].value
         
         # add it to container
         todo = container.add(todo)
@@ -145,12 +147,12 @@ class KArm(object):
             component.add('completed').value = todo.completed
         if todo.percent_complete is not None:
             component.add('percent-complete').value = todo.percent_complete
-        if todo.x_kde_ktimetracker_totalsessiontime is not None:
-            component.add('X-KDE-ktimetracker-totalSessionTime').value = todo.x_kde_ktimetracker_totalsessiontime
-        if todo.x_kde_ktimetracker_totaltasktime is not None:
-            component.add('X-KDE-ktimetracker-totalTaskTime').value = todo.x_kde_ktimetracker_totaltasktime
-        if todo.x_kde_ktimetracker_bctype is not None:
-            component.add('X-KDE-ktimetracker-bctype').value = todo.x_kde_ktimetracker_bctype
+        if todo.x_kde_karm_totalsessiontime is not None:
+            component.add('X-KDE-karm-totalSessionTime').value = todo.x_kde_karm_totalsessiontime
+        if todo.x_kde_karm_totaltasktime is not None:
+            component.add('X-KDE-karm-totalTaskTime').value = todo.x_kde_karm_totaltasktime
+        if todo.x_basecamp_type is not None:
+            component.add('X-BASECAMP-type').value = todo.x_basecamp_type
         
         # then add children to it
         for todo in todo.todos.values():
@@ -189,8 +191,8 @@ class KArm(object):
         return out.encode('utf-8')
     
     def _strTask(self, todo, indent=""):
-        sessionTime = todo.x_kde_ktimetracker_totalsessiontime or '0'
-        totalTime = todo.x_kde_ktimetracker_totaltasktime or '0'
+        sessionTime = todo.x_kde_karm_totalsessiontime or '0'
+        totalTime = todo.x_kde_karm_totaltasktime or '0'
         out = '%s%s [%s] (%s, total:%s)\n' % (indent,
                                               todo.summary,
                                               todo.uid,

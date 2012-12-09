@@ -52,7 +52,7 @@ class CheckOut(Command):
             karm.add(Todo(
                 str(project.id),
                 project.name,
-                x_kde_ktimetracker_bctype='project'
+                x_basecamp_type='project'
             ))
             if self.cmdutil.debug:
                 print "Added project: <%s>" % project.name
@@ -64,7 +64,7 @@ class CheckOut(Command):
                 str(todolist.id),
                 todolist.name,
                 related_to=project_id,
-                x_kde_ktimetracker_bctype='todolist'
+                x_basecamp_type='todolist'
             ))
             if self.cmdutil.debug:
                 print "    Added todo list: <%s>" % todolist.name
@@ -79,8 +79,8 @@ class CheckOut(Command):
                     str(todo.id),
                     todo.content,
                     related_to=str(todolist.id),
-                    x_kde_ktimetracker_bctype='todoitem',
-                    x_kde_ktimetracker_totaltasktime=str(int(hours * 60.0))
+                    x_basecamp_type='todoitem',
+                    x_kde_karm_totaltasktime=str(int(hours * 60.0))
                 ))
                 if self.cmdutil.debug:
                     print "        Added todo item: <%s>" % todo.content
