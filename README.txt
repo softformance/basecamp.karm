@@ -4,6 +4,9 @@ Introduction
 This package allows moving hours between your Basecamp account and
 KArm (Linux KDE Personal Time Tracker, called KTimeTracker in FC11).
 
+This BRANCH is to use for older version of KTimeTracker when it was still
+called: KArm.
+
 Usage
 -----
 
